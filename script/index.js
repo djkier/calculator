@@ -2,17 +2,51 @@ const dayModeBtn = document.querySelector('#screen img');
 const body = document.querySelector('body');
 const trashBtn = document.querySelector('#right-container img');
 const calculator = document.querySelector(".calculator");
+const buttons = document.querySelector("#button-container");
+const buttonPer = document.querySelectorAll('#button-container button')
 
-function toggleDayMode(){
-    document.querySelector('body').classList.toggle('day-mode');
+
+let history = [];
+let firstNumber = [];
+let secondNumber = [];
+let operator;
+
+
+
+
+
+function handleClickButton(e){
+ 
+    if(!isNaN(e.target.textContent)){
+        console.log(e.target.textContent);
+    } 
+    // else if(e.target.className === 'operator'){
+    //     console.log(e.target.textContent + " I'm a Operator")
+    // } 
+    // else if (e.target.className === 'prog'){
+    //     console.log('Hi Iam an innate program')
+    // } 
+    // else if (e.target.className.includes('dot')){
+    //     console.log('hi im a DOT');
+    // }
+    
 }
 
-let counter = 0;
+buttons.addEventListener('click', handleClickButton)
+buttonPer.forEach(btn => {
+    btn.addEventListener('mousedown', () => {
+        
+        btn.style.transform = 'scale(0.90)';
+    });
+    btn.addEventListener('mouseup', ()=> {
+    
+        btn.style.transform = 'scale(1.0)';
+    })
+})
 
-dayModeBtn.addEventListener('click', () => {
+
+function toggleDayMode(){
     body.classList.toggle('day-mode')
-    counter++; 
-    console.log('clicked ' + counter)
     if (body.className) {
         dayModeBtn.src = './src/moon.svg';
         dayModeBtn.alt = 'moon-icon';
@@ -26,5 +60,6 @@ dayModeBtn.addEventListener('click', () => {
         calculator.style.boxShadow = '';
         
     }
+}
 
-})
+dayModeBtn.addEventListener('click', toggleDayMode)
