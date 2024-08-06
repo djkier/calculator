@@ -39,7 +39,6 @@ function handleClickButton(e){
             numberInput.push(int);
             postNumberOnScreen();
         }
-        console.log(numberInput.join(''));
     } 
 
     
@@ -53,7 +52,8 @@ function handleClickButton(e){
                 postNumberOnScreen();
                 break;
             case 'DEL':
-                console.log('delete');
+                numberInput.pop();
+                postNumberOnScreen();
                 break;
             default:
                 console.log('Hello World');
