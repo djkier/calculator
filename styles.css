@@ -101,7 +101,9 @@ body{
 #screen {
     height: 35%;
     padding: 0.3125rem;
+
 }
+
 
 #screen img {
     width: 1.5rem;
@@ -114,7 +116,7 @@ body{
     color: var(--screen-number-sub);
     font-size: 1.5rem;
     margin-bottom: -1rem;
-   
+
 }
 
 #screen p span {
@@ -122,11 +124,15 @@ body{
 }
 
 #screen h1 {
+    display: inline-block;
+    box-sizing: content-box;
     text-align: right;
     font-size: 4rem;
     color: var(--screen-number-main);
     font-weight: 500;
-    
+    height: 4.625rem;
+    float: right;
+
 }
 
 

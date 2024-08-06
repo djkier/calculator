@@ -3,29 +3,63 @@ const body = document.querySelector('body');
 const trashBtn = document.querySelector('#right-container img');
 const calculator = document.querySelector(".calculator");
 const buttons = document.querySelector("#button-container");
-const buttonPer = document.querySelectorAll('#button-container button')
+const buttonPer = document.querySelectorAll('#button-container button');
+const mainScreenNumber = document.querySelector('#screen h1');
 
 
 let history = [];
-let firstNumber = [];
-let secondNumber = [];
+let numberInput = [];
+
+
 let operator;
 
 
-
-
+function postNumberOnScreen() {
+    const forScreenNumber = Number(numberInput.join('')).toLocaleString();
+    mainScreenNumber.textContent = forScreenNumber;
+    
+    if (numberInput.length >= 9) {
+        mainScreenNumber.style.fontSize = '2.5rem';
+    } 
+    else if (numberInput.length > 6) {
+        mainScreenNumber.style.fontSize = '3rem';
+    } else {
+        mainScreenNumber.style.fontSize = '4rem'
+    }
+    
+}
 
 function handleClickButton(e){
- 
+    
     if(!isNaN(e.target.textContent)){
-        console.log(e.target.textContent);
+        const int = e.target.textContent;
+        if( numberInput.length === 0 && Number(e.target.textContent) === 0) {
+            postNumberOnScreen();
+        }else if (numberInput.length < 10) {
+            numberInput.push(int);
+            postNumberOnScreen();
+        }
+        console.log(numberInput.join(''));
     } 
+
+    
     // else if(e.target.className === 'operator'){
     //     console.log(e.target.textContent + " I'm a Operator")
     // } 
-    // else if (e.target.className === 'prog'){
-    //     console.log('Hi Iam an innate program')
-    // } 
+    else if (e.target.className === 'prog'){
+        switch (e.target.textContent) {
+            case 'AC':
+                numberInput = []
+                postNumberOnScreen();
+                break;
+            case 'DEL':
+                console.log('delete');
+                break;
+            default:
+                console.log('Hello World');
+                
+        }
+    } 
     // else if (e.target.className.includes('dot')){
     //     console.log('hi im a DOT');
     // }
