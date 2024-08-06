@@ -1,7 +1,10 @@
 :root {
     font-size: 16px;
+    --body-background-color: #F7F8FB;
     --background-color: #17181A;
     --heading-color: #2C2C2C;
+    --prog-color:#d4d4d2;
+
     --orange: #FF9500;
     --screen-number-main: #D4D4D2;
     --screen-number-sub: #828282;
@@ -25,8 +28,16 @@ body{
     height: 97vh;
     width: 99vw;
     overflow: hidden;
+    background-color: var(--body-background-color);
 }
 
+.day-mode{
+    --body-background-color: #17181A;
+    --background-color: #F7F8FB;
+    --screen-number-main: #505050;
+    --prog-color: #FBFBFD;
+    --heading-color: #E4E4E4;
+}
 
 
 .calculator{
@@ -103,6 +114,11 @@ body{
     color: var(--screen-number-sub);
     font-size: 1.5rem;
     margin-bottom: -1rem;
+   
+}
+
+#screen p span {
+    margin-left: 1rem;
 }
 
 #screen h1 {
@@ -138,19 +154,19 @@ body{
 }
 
 .prog {
-    background-color: var(--screen-number-main);
-    color: var(--heading-color);
+    background-color: #D4D4D2;
+    color: #1C1C1C;
 }
 
 .operator {
     background-color: var(--orange);
-    color: var(--screen-number-main);
+    color: var(--prog-color) ;
    
 }
 
 .num {
-    background-color: var(--screen-number-sub);
-    color: var(--screen-number-main);
+    background-color: #505050;
+    color: #D4D4D2;
    
 }
 
@@ -168,7 +184,7 @@ body{
     flex-direction: column;
     justify-content: space-between;
     padding:0.3125rem 0.3125rem 0.3125rem 0.625rem;
-   
+    align-items: flex-start;
 }
 
 
@@ -216,4 +232,6 @@ body{
 #right-container img {
     height: calc(2rem - 0.3125rem);
     cursor: pointer;
+    width: 1.2rem;
+    align-self: flex-end;
 }
