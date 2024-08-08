@@ -9,33 +9,50 @@ const mainScreenNumber = document.querySelector('#screen h1');
 
 let history = [];
 let numberInput = [];
+let forScreenNumber, firstNumber, operator;
+let negative = false;
 
 
-let operator;
-
-
+//screenchange
 function postNumberOnScreen() {
-    const forScreenNumber = Number(numberInput.join('')).toLocaleString();
-    mainScreenNumber.textContent = forScreenNumber;
+    if (numberInput.includes('.') && (numberInput.length - numberInput.indexOf('.')) <= 2){
+        forScreenNumber = numberInput.join('');
+
+    } else if (numberInput.includes('.') && numberInput.length - numberInput.indexOf('.')>= 3) {
+        forScreenNumber = Number(numberInput.join('')).toFixed(2);
+    } 
+    else if (!numberInput.includes('.')) {
+        forScreenNumber = Number(numberInput.join('')).toLocaleString();
+    }
     
-    if (numberInput.length >= 9) {
+    console.log(numberInput);
+
+
+    mainScreenNumber.textContent = `${negative ? '-' : ''}${forScreenNumber}`;
+    if (numberInput.length >= 9 ) {
         mainScreenNumber.style.fontSize = '2.5rem';
     } 
     else if (numberInput.length > 6) {
         mainScreenNumber.style.fontSize = '3rem';
-    } else {
+    } 
+    else {
         mainScreenNumber.style.fontSize = '4rem'
     }
     
 }
 
 function handleClickButton(e){
-    
+
     if(!isNaN(e.target.textContent)){
         const int = e.target.textContent;
-        if( numberInput.length === 0 && Number(e.target.textContent) === 0) {
+        if( numberInput.length === 1 && Number(int) === 0 && Number(numberInput[0]) === 0) {
             postNumberOnScreen();
-        }else if (numberInput.length < 10) {
+        } 
+        else if (!numberInput.includes('.') && numberInput.length < 10){
+            numberInput.push(int);
+            postNumberOnScreen();
+        } 
+        else if (numberInput.includes('.') && (numberInput.length - numberInput.indexOf('.')) <= 2) {
             numberInput.push(int);
             postNumberOnScreen();
         }
@@ -45,10 +62,13 @@ function handleClickButton(e){
     // else if(e.target.className === 'operator'){
     //     console.log(e.target.textContent + " I'm a Operator")
     // } 
+
+
     else if (e.target.className === 'prog'){
         switch (e.target.textContent) {
             case 'AC':
                 numberInput = []
+                forScreenNumber = 0;
                 postNumberOnScreen();
                 break;
             case 'DEL':
@@ -56,13 +76,19 @@ function handleClickButton(e){
                 postNumberOnScreen();
                 break;
             default:
-                console.log('Hello World');
+                console.log('negative clicked')
+                postNumberOnScreen();
                 
         }
     } 
-    // else if (e.target.className.includes('dot')){
-    //     console.log('hi im a DOT');
-    // }
+
+    else if (e.target.className.includes('dot')){
+        if(!numberInput.includes('.') && numberInput.length < 10){
+            numberInput.push('.');
+            forScreenNumber = numberInput.join('');
+            postNumberOnScreen();
+        }
+    }
     
 }
 
