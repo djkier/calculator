@@ -22,17 +22,17 @@ function operation(operatorSign, firstNum, secondNum){
             result = firstNum + secondNum;   
             break;
         case '-':
-            result = firstNum + secondNum;
+            result = firstNum - secondNum;
             break;
         case 'X':
-            result = firstNum + secondNum;
+            result = firstNum * secondNum;
             break;
         case '/':
             result = secondNum !== 0 ? firstNum/secondNum : divideByZero(); 
             break;
         default:
             //equal sign operator
-            console.log('Error: Cant read operator')
+            result = 0;
             break;
     }
 }
@@ -43,19 +43,6 @@ function subScreenChanger() {
 
 //Main screenchange
 function postNumberOnScreen() {
-    if (numberInput.includes('.') && (numberInput.length - numberInput.indexOf('.')) <= 2){
-        forScreenNumber = numberInput.join('');
-
-    } else if (numberInput.includes('.') && numberInput.length - numberInput.indexOf('.')>= 3) {
-        forScreenNumber = Number(numberInput.join('')).toFixed(2);
-    } 
-    else if (!numberInput.includes('.')) {
-        forScreenNumber = Number(numberInput.join('')).toLocaleString();
-    }
-    
-    console.log(numberInput);
-
-
     mainScreenNumber.textContent = `${negative ? '-' : ''}${forScreenNumber}`;
     if (numberInput.length >= 9 ) {
         mainScreenNumber.style.fontSize = '2.5rem';
@@ -66,6 +53,8 @@ function postNumberOnScreen() {
     else {
         mainScreenNumber.style.fontSize = '4rem'
     }
+
+    // console.log(numberInput);
     
 }
 
@@ -79,35 +68,56 @@ function handleClickButton(e){
         } 
         else if (!numberInput.includes('.') && numberInput.length < 10){
             numberInput.push(int);
+            forScreenNumber = Number(numberInput.join('')).toLocaleString();
         } 
         else if (numberInput.includes('.') && (numberInput.length - numberInput.indexOf('.')) <= 2) {
             numberInput.push(int);
+            forScreenNumber = numberInput.join('');
         }
+
     } 
 
     
     else if(e.target.className === 'operator'){
-        if (isNaN(result)) {
-            let absFirstNumber = numberInput.length === 0 ? 0 : Number(numberInput.join(''));
-            firstNumber = negative ? -absFirstNumber : absFirstNumber;
-        } else {
-            firstNumber = Number(result);
+        
+        if (!operator) {
+            if (!isNaN(result) && numberInput.length === 0) {
+                firstNumber = Number(result);
+                secondNumber = '';
+            } else {
+            // if (isNaN(result)) {
+                let absFirstNumber = numberInput.length === 0 ? 0 : Number(numberInput.join(''));
+                firstNumber = negative ? -absFirstNumber : absFirstNumber;
+                numberInput = [];
+                negative = false;
+            } 
         }
 
-        if (!isNaN(firstNumber)){
-            let absSecondNumber = numberInput.length === 0 ? 0 : Number(numberInput.join(''));
+        if (operator && !isNaN(firstNumber) && numberInput.length > 0){
+            let absSecondNumber = Number(numberInput.join(''));
             secondNumber = negative ? -absSecondNumber : absSecondNumber;
+            numberInput = [];
+            negative = false;
         }
 
-        if (e.target.textContent === '=') {
-            isNaN(secondNumber) ? result = firstNumber : operation(operator, firstNumber, secondNumber); 
-        } else {
-            operator = e.target.textContent;
-            
+        if (isNaN(secondNumber) && e.target.textContent === '='){
+            result = Number(firstNumber);
+        } else if (!isNaN(secondNumber)){
+            operation(operator, firstNumber, secondNumber);
         }
-        subScreenChanger();
 
-        console.log(result);
+        // subScreenChanger();
+        
+
+        console.log(`
+    First No.:     ${firstNumber}
+    Second No.:    ${secondNumber}
+    Result:        ${result}`);
+        operator = e.target.textContent === '=' ? '' : e.target.textContent;
+
+        console.log(`
+    Operator: ${operator}`)
+
     } 
 
 
@@ -132,7 +142,8 @@ function handleClickButton(e){
             forScreenNumber = numberInput.join('');
         }
     }
-    postNumberOnScreen();
+    // postNumberOnScreen();
+    
 }
 
 buttons.addEventListener('click', handleClickButton)
