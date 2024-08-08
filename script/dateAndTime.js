@@ -18,7 +18,6 @@ function timeChanger() {
     const timeChange = `${formatSingleDigit(displayHours)}:${formatSingleDigit(minutes)}:${formatSingleDigit(seconds)} ${period}`
     spanTime.textContent = timeChange;
     timeNow.appendChild(spanTime)
-    console.log(timeChange);
 }
 
 setInterval(timeChanger, 1000)

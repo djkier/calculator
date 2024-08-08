@@ -9,11 +9,39 @@ const mainScreenNumber = document.querySelector('#screen h1');
 
 let history = [];
 let numberInput = [];
-let forScreenNumber, firstNumber, operator;
+let forScreenNumber, firstNumber, secondNumber, result, operator;
 let negative = false;
 
+function divideByZero(){
+    return "Can't Divide By Zero"
+}
 
-//screenchange
+function operation(operatorSign, firstNum, secondNum){
+    switch (operatorSign) {
+        case '+':
+            result = firstNum + secondNum;   
+            break;
+        case '-':
+            result = firstNum + secondNum;
+            break;
+        case 'X':
+            result = firstNum + secondNum;
+            break;
+        case '/':
+            result = secondNum !== 0 ? firstNum/secondNum : divideByZero(); 
+            break;
+        default:
+            //equal sign operator
+            console.log('Error: Cant read operator')
+            break;
+    }
+}
+
+function subScreenChanger() {
+    console.log('Im function Sub Screen');
+}
+
+//Main screenchange
 function postNumberOnScreen() {
     if (numberInput.includes('.') && (numberInput.length - numberInput.indexOf('.')) <= 2){
         forScreenNumber = numberInput.join('');
@@ -41,27 +69,46 @@ function postNumberOnScreen() {
     
 }
 
+
+
 function handleClickButton(e){
 
     if(!isNaN(e.target.textContent)){
         const int = e.target.textContent;
         if( numberInput.length === 1 && Number(int) === 0 && Number(numberInput[0]) === 0) {
-            postNumberOnScreen();
         } 
         else if (!numberInput.includes('.') && numberInput.length < 10){
             numberInput.push(int);
-            postNumberOnScreen();
         } 
         else if (numberInput.includes('.') && (numberInput.length - numberInput.indexOf('.')) <= 2) {
             numberInput.push(int);
-            postNumberOnScreen();
         }
     } 
 
     
-    // else if(e.target.className === 'operator'){
-    //     console.log(e.target.textContent + " I'm a Operator")
-    // } 
+    else if(e.target.className === 'operator'){
+        if (isNaN(result)) {
+            let absFirstNumber = numberInput.length === 0 ? 0 : Number(numberInput.join(''));
+            firstNumber = negative ? -absFirstNumber : absFirstNumber;
+        } else {
+            firstNumber = Number(result);
+        }
+
+        if (!isNaN(firstNumber)){
+            let absSecondNumber = numberInput.length === 0 ? 0 : Number(numberInput.join(''));
+            secondNumber = negative ? -absSecondNumber : absSecondNumber;
+        }
+
+        if (e.target.textContent === '=') {
+            isNaN(secondNumber) ? result = firstNumber : operation(operator, firstNumber, secondNumber); 
+        } else {
+            operator = e.target.textContent;
+            
+        }
+        subScreenChanger();
+
+        console.log(result);
+    } 
 
 
     else if (e.target.className === 'prog'){
@@ -69,16 +116,13 @@ function handleClickButton(e){
             case 'AC':
                 numberInput = []
                 forScreenNumber = 0;
-                postNumberOnScreen();
                 break;
             case 'DEL':
                 numberInput.pop();
-                postNumberOnScreen();
                 break;
             default:
-                console.log('negative clicked')
-                postNumberOnScreen();
-                
+                //toggle negative sign
+                negative = !negative;
         }
     } 
 
@@ -86,10 +130,9 @@ function handleClickButton(e){
         if(!numberInput.includes('.') && numberInput.length < 10){
             numberInput.push('.');
             forScreenNumber = numberInput.join('');
-            postNumberOnScreen();
         }
     }
-    
+    postNumberOnScreen();
 }
 
 buttons.addEventListener('click', handleClickButton)
