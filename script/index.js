@@ -1,3 +1,5 @@
+import { handleClickOperator, result, subScreenNumber, resultToZero } from "./operator.js";
+
 const dayModeBtn = document.querySelector('#screen img');
 const body = document.querySelector('body');
 const trashBtn = document.querySelector('#right-container img');
@@ -7,142 +9,106 @@ const buttonPer = document.querySelectorAll('#button-container button');
 const mainScreenNumber = document.querySelector('#screen h1');
 
 
-let history = [];
+let forScreenNumber;
 let numberInput = [];
-let forScreenNumber, firstNumber, secondNumber, result, operator;
+let currentNumber = '';
 let negative = false;
 
-function divideByZero(){
-    return "Can't Divide By Zero"
-}
 
-function operation(operatorSign, firstNum, secondNum){
-    switch (operatorSign) {
-        case '+':
-            result = firstNum + secondNum;   
-            break;
-        case '-':
-            result = firstNum - secondNum;
-            break;
-        case 'X':
-            result = firstNum * secondNum;
-            break;
-        case '/':
-            result = secondNum !== 0 ? firstNum/secondNum : divideByZero(); 
-            break;
-        default:
-            //equal sign operator
-            result = 0;
-            break;
-    }
-}
-
-function subScreenChanger() {
-    console.log('Im function Sub Screen');
-}
 
 //Main screenchange
 function postNumberOnScreen() {
-    mainScreenNumber.textContent = `${negative ? '-' : ''}${forScreenNumber}`;
-    if (numberInput.length >= 9 ) {
+    console.log(numberInput)
+    let mainScreenDisplay = `${negative ? '-' : ''}${forScreenNumber}`
+    mainScreenNumber.textContent = mainScreenDisplay.length > 10 ? (mainScreenDisplay / 10**(mainScreenDisplay.length - 1)).toFixed(5) : mainScreenDisplay;
+    if (forScreenNumber.length >= 9 ) {
         mainScreenNumber.style.fontSize = '2.5rem';
     } 
-    else if (numberInput.length > 6) {
+    else if (forScreenNumber.length> 6) {
         mainScreenNumber.style.fontSize = '3rem';
     } 
     else {
         mainScreenNumber.style.fontSize = '4rem'
     }
+    
+    currentNumber = numberInput.length === 0 ? '' : Number(numberInput.join(''));
+    console.log(currentNumber);
 
     // console.log(numberInput);
     
 }
 
 
-
 function handleClickButton(e){
-
-    if(!isNaN(e.target.textContent)){
-        const int = e.target.textContent;
-        if( numberInput.length === 1 && Number(int) === 0 && Number(numberInput[0]) === 0) {
-        } 
-        else if (!numberInput.includes('.') && numberInput.length < 10){
-            numberInput.push(int);
-            forScreenNumber = Number(numberInput.join('')).toLocaleString();
-        } 
-        else if (numberInput.includes('.') && (numberInput.length - numberInput.indexOf('.')) <= 2) {
-            numberInput.push(int);
-            forScreenNumber = numberInput.join('');
-        }
-
-    } 
-
     
-    else if(e.target.className === 'operator'){
-        
-        if (!operator) {
-            if (!isNaN(result) && numberInput.length === 0) {
-                firstNumber = Number(result);
-                secondNumber = '';
-            } else {
-            // if (isNaN(result)) {
-                let absFirstNumber = numberInput.length === 0 ? 0 : Number(numberInput.join(''));
-                firstNumber = negative ? -absFirstNumber : absFirstNumber;
-                numberInput = [];
-                negative = false;
-            } 
-        }
+    if (e.target.id !== 'button-container'){
 
-        if (operator && !isNaN(firstNumber) && numberInput.length > 0){
-            let absSecondNumber = Number(numberInput.join(''));
-            secondNumber = negative ? -absSecondNumber : absSecondNumber;
-            numberInput = [];
-            negative = false;
-        }
-
-        if (isNaN(secondNumber) && e.target.textContent === '='){
-            result = Number(firstNumber);
-        } else if (!isNaN(secondNumber)){
-            operation(operator, firstNumber, secondNumber);
-        }
-
-        // subScreenChanger();
-        
-
-        console.log(`
-    First No.:     ${firstNumber}
-    Second No.:    ${secondNumber}
-    Result:        ${result}`);
-        operator = e.target.textContent === '=' ? '' : e.target.textContent;
-
-        console.log(`
-    Operator: ${operator}`)
-
-    } 
-
-
-    else if (e.target.className === 'prog'){
-        switch (e.target.textContent) {
-            case 'AC':
-                numberInput = []
+        if(!isNaN(e.target.textContent)){
+            const int = e.target.textContent;
+            if( numberInput.length === 1 && Number(int) === 0 && Number(numberInput[0]) === 0) {
                 forScreenNumber = 0;
-                break;
-            case 'DEL':
-                numberInput.pop();
-                break;
-            default:
-                //toggle negative sign
-                negative = !negative;
-        }
-    } 
+               
+            } 
+            else if (!numberInput.includes('.') && numberInput.length < 10){
+                numberInput.push(int);
+                
+                forScreenNumber = Number(numberInput.join(''));
+                
+                
+            } 
+            else if (numberInput.includes('.') && (numberInput.length - numberInput.indexOf('.')) <= 2) {
+                numberInput.push(int);
+                console.log('r')
+                forScreenNumber = numberInput.join('');
+            }
+            
+        } 
 
-    else if (e.target.className.includes('dot')){
-        if(!numberInput.includes('.') && numberInput.length < 10){
-            numberInput.push('.');
-            forScreenNumber = numberInput.join('');
+
+        else if(e.target.className === 'operator') {
+            numberInput = [];
+            handleClickOperator(e.target.textContent, currentNumber);
+            currentNumber = '';
+            if (result !== '') {
+                forScreenNumber = Math.abs(result);
+                
+            } 
+            if(!isNaN(result) && result < 0) {
+                negative = true;
+            }
         }
+
+        else if (e.target.className === 'prog'){
+            switch (e.target.textContent) {
+                case 'AC':
+                    numberInput = []
+                    forScreenNumber = 0;
+                    resultToZero();
+                    subScreenNumber.textContent = '';
+                    break;
+                case 'DEL':
+                    numberInput.pop();
+                    resultToZero();
+                    if(numberInput.length === 0) {
+                        negative = false;
+                    } 
+                    forScreenNumber = numberInput.join('');
+                    break;
+                default:
+                    //toggle negative sign
+                    negative = !negative;
+            }
+        } 
+
+        else if (e.target.className.includes('dot')){
+            if(!numberInput.includes('.') && numberInput.length < 10){
+                numberInput.push('.');
+                forScreenNumber = numberInput.join('');
+            }
+        }
+        
+        postNumberOnScreen();
     }
-    // postNumberOnScreen();
     
 }
 
