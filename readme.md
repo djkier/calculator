@@ -9,6 +9,8 @@ To view the calculator and its available features visit this [Calculator Website
 
 ## Features
 - Day Mode: Switch to the day-mode style of the calculator.
+- Sub Screen: Features the given number and the operator to be used.
+- Time: Features a fully working time.
 
 ## Acknowledgements
 The layout is inspired by iOS design combining the calculator design of Microsoft Calculator.
