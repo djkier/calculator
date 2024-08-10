@@ -13,59 +13,63 @@
     <script type="module" src="./script/index.js" defer></script>
 </head>
 <body >
-    <div class="calculator">
-        <div class="heading">
-            <div class="left-icon">
-                <img src="./src/calculator-icon.png" alt="calculator-icon" />
-                <p>Calculator</p>
+    <div>
+        <div class="calculator">
+            <div class="heading">
+                <div class="left-icon">
+                    <img src="./src/calculator-icon.png" alt="calculator-icon" />
+                    <p>Calculator</p>
+                </div>
+                <p id="time-now"></p>
+
             </div>
-            <p id="time-now"></p>
 
-        </div>
-
-        <div class="calc-container">
-            <section class="left-container">
-                <section id="screen">
-                    <img src="./src/sun.png" alt="sun-icon"/>
-                    <p></p>
-                    <h1></h1>
-                </section>
-               
+            <div class="calc-container">
+                <section class="left-container">
+                    <section id="screen">
+                        <img src="./src/sun.png" alt="sun-icon"/>
+                        <p></p>
+                        <h1></h1>
+                    </section>
                 
-                <section id="button-container">
-                    <button class="prog">AC</button>
-                    <button class="prog">DEL</button>
-                    <button class="prog">NEG</button>
-                    <button class="operator">/</button>
-                    <button class="num">7</button>
-                    <button class="num">8</button>
-                    <button class="num">9</button>
-                    <button class="operator">X</button>
-                    <button class="num">4</button>
-                    <button class="num">5</button>
-                    <button class="num">6</button>
-                    <button class="operator">-</button>
-                    <button class="num">1</button>
-                    <button class="num">2</button>
-                    <button class="num">3</button>
-                    <button class="operator">+</button>
-                    <button class="num" id="zero">0</button>
-                    <button class="num dot">.</button>
-                    <button class="operator"">=</button>
-                </section>
-            </section>
-
-            <section id="right-container">
-                <div id="navbar">
-                    <p>History</p>
-                </div>
-                <div id="history-screen"> 
                     
-                </div>
-                <img src="./src/trash-night.png" alt="trash-icon"/>
-            </section>
-            
+                    <section id="button-container">
+                        <button class="prog">AC</button>
+                        <button class="prog">DEL</button>
+                        <button class="prog">NEG</button>
+                        <button class="operator">/</button>
+                        <button class="num">7</button>
+                        <button class="num">8</button>
+                        <button class="num">9</button>
+                        <button class="operator">X</button>
+                        <button class="num">4</button>
+                        <button class="num">5</button>
+                        <button class="num">6</button>
+                        <button class="operator">-</button>
+                        <button class="num">1</button>
+                        <button class="num">2</button>
+                        <button class="num">3</button>
+                        <button class="operator">+</button>
+                        <button class="num" id="zero">0</button>
+                        <button class="num dot">.</button>
+                        <button class="operator"">=</button>
+                    </section>
+                </section>
+
+                <section id="right-container">
+                    <div id="navbar">
+                        <p>History</p>
+                    </div>
+                    <div id="history-screen"> 
+                        
+                    </div>
+                    <img src="./src/trash-night.png" alt="trash-icon"/>
+                </section>
+                
+            </div>
         </div>
+        <p id ='copyright'><a href="https://github.com/djkier" target="_blank">djkier</a> &copy;2024</p>
     </div>
+
 </body>
 </html>

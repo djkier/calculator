@@ -31,12 +31,27 @@ body{
     background-color: var(--body-background-color);
 }
 
+
+
 .day-mode{
     --body-background-color: #17181A;
     --background-color: #F7F8FB;
     --screen-number-main: #505050;
     --prog-color: #FBFBFD;
     --heading-color: #E4E4E4;
+    
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+#copyright {
+    color: var(--background-color);
+    margin-top: 0.3rem;
+    font-weight: 600;
+    text-align: center;
     
 }
 
