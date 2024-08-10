@@ -18,7 +18,7 @@ let negative = false;
 
 //Main screenchange
 function postNumberOnScreen() {
-    console.log(numberInput)
+    
     let mainScreenDisplay = `${negative ? '-' : ''}${forScreenNumber}`
     mainScreenNumber.textContent = mainScreenDisplay.length > 10 ? (mainScreenDisplay / 10**(mainScreenDisplay.length - 1)).toFixed(5) : mainScreenDisplay;
     if (forScreenNumber.length >= 9 ) {
@@ -32,9 +32,9 @@ function postNumberOnScreen() {
     }
     
     currentNumber = numberInput.length === 0 ? '' : Number(numberInput.join(''));
-    console.log(currentNumber);
+   
 
-    // console.log(numberInput);
+    
     
 }
 
@@ -58,7 +58,7 @@ function handleClickButton(e){
             } 
             else if (numberInput.includes('.') && (numberInput.length - numberInput.indexOf('.')) <= 2) {
                 numberInput.push(int);
-                console.log('r')
+               
                 forScreenNumber = numberInput.join('');
             }
             
@@ -131,13 +131,13 @@ function toggleDayMode(){
         dayModeBtn.src = './src/moon.svg';
         dayModeBtn.alt = 'moon-icon';
         trashBtn.src = './src/trash-day.png';
-        calculator.style.boxShadow = `0px 0px 247px -60px rgba(230,255,0,0.5)`;
+        calculator.style.animation = `bgAnimate 20s ease-in infinite`;
 
     } else {
         dayModeBtn.src = './src/sun.png';
         dayModeBtn.alt = 'sun-icon';
         trashBtn.src = './src/trash-night.png';
-        calculator.style.boxShadow = '';
+        calculator.style.animation = '';
         
     }
 }

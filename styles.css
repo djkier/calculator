@@ -37,8 +37,8 @@ body{
     --screen-number-main: #505050;
     --prog-color: #FBFBFD;
     --heading-color: #E4E4E4;
+    
 }
-
 
 .calculator{
     height: 31.25rem;
@@ -46,7 +46,29 @@ body{
     border-radius: 0.625rem;
     background-color: var(--background-color);
     overflow: hidden;
+    
 }
+
+@keyframes bgAnimate {
+    0% {
+        box-shadow: -10px 10px 247px -60px rgba(255, 110, 110, 1);
+    }
+
+    20% {
+        box-shadow: -10px -10px 247px -40px rgba(230,255,0,1);
+    }
+    
+    30%{
+        box-shadow: 10px -10px 247px -30px rgba(255, 136, 0, 1);
+    }
+    70%{
+        box-shadow: 10px 10px 247px -80px rgba(17, 0, 255, 1);
+    } 
+    100%{
+        box-shadow: -10px 10px 247px -60px rgba(255, 110, 110, 1);
+    }
+}
+
 
 .heading{
     height: 1.875rem;
