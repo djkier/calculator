@@ -130,7 +130,7 @@ function toggleDayMode(){
     if (body.className) {
         dayModeBtn.src = './src/moon.svg';
         dayModeBtn.alt = 'moon-icon';
-        trashBtn.src = './src/trash-day.png'
+        trashBtn.src = './src/trash-day.png';
         calculator.style.boxShadow = `0px 0px 247px -60px rgba(230,255,0,0.5)`;
 
     } else {
