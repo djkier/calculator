@@ -93,19 +93,18 @@ function handleClickOperator(op, curr){
 
 
     if (op !== '='){
-        console.log('not equal')
-        
+
         if (first === '') {
            
             if (curr === '' && result === '') {
-                console.log('q1')
+     
                 first = 0;
             } else if (curr === '' && result !== ''){
-                console.log('w1')
+      
                 first = result;
             } 
             else if (curr !== ''){
-                console.log('e1')
+  
                 
                 first = curr;
                
@@ -115,11 +114,11 @@ function handleClickOperator(op, curr){
         } else {
 
             if (curr === '') {
-                console.log('r1')
+       
                 oper = op;
             
             } else {
-                console.log('t1')
+            
                 second = curr;
             }
             
@@ -128,7 +127,7 @@ function handleClickOperator(op, curr){
         
 
         if (first !== '' && second !== ''){
-            console.log('y1')
+          
             operation();
             
             
@@ -140,16 +139,15 @@ function handleClickOperator(op, curr){
         subScreenNumber.textContent = `${first} ${oper}`;
 
     } else {
-        console.log('equal')
-        console.log(oper)
+      
 
         if (first === '') {
-            console.log('q2')
+         
             first = curr === '' ? 0 : curr;
         } 
 
         if (oper === '') {
-            console.log('w2')
+          
             result = first;
             subScreenNumber.textContent = `${first} =`;
 
@@ -160,7 +158,7 @@ function handleClickOperator(op, curr){
             subHistory = {first: '', second: '', operator: '', result: '',};
 
         } else if (oper !== '' && second === '') {
-            console.log('e2')
+     
             second = curr;
 
             
@@ -169,7 +167,7 @@ function handleClickOperator(op, curr){
        
 
         if (first !== '' && second !== '') {
-            console.log('r2')
+     
             subScreenNumber.textContent = `${first} ${oper} ${second}`;
             operation();
             

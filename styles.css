@@ -220,7 +220,12 @@ body{
     height: calc(100% - 2.5rem);
     width: 100%;
     text-align: right;
-    overflow: hidden;
+    overflow-y: scroll;
+    scrollbar-color: var(--heading-color) transparent;
+    scrollbar-width: thin;
+    overflow-x: hidden;
+    margin-bottom: 0.6rem;
+    
    
 }
 
@@ -240,6 +245,7 @@ body{
     
     height: 4rem;
     margin-bottom: 1rem;
+    margin-right: 0.3rem;
 }
 
 .number-sub-history {
