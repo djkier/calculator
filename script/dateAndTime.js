@@ -20,6 +20,8 @@ function timeChanger() {
     timeNow.appendChild(spanTime)
 }
 
+
+
 timeChanger();
 setInterval(timeChanger, 1000)
 

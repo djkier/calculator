@@ -142,4 +142,17 @@ function toggleDayMode(){
     }
 }
 
-dayModeBtn.addEventListener('click', toggleDayMode)
+
+const timeMode = new Date;
+const hours = timeMode.getHours();
+
+
+
+
+if (hours <= 6 || hours >= 18){
+    toggleDayMode();
+}
+
+dayModeBtn.addEventListener('click', toggleDayMode);
+
+
