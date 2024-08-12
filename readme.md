@@ -13,6 +13,7 @@ To view the calculator and its available features visit this [Calculator Website
 - Time: Fully working time.
 - Sub Screen: Indicated in the subscreen the given numbers and the operator being used.
 - History: Compiled results from the operations, availability to delete the results by using the trash button.
+- Responsive Design: Calculator is available on smaller screen size.
 
 ## Acknowledgements
 The layout is inspired by iOS design combining the calculator design of Microsoft Calculator.

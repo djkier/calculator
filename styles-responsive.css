@@ -1,0 +1,15 @@
+@media (max-width: 600px) {
+    .calculator {
+        width: 22rem;
+    }
+    
+    #right-container {
+        display: none;
+    }
+
+    .left-container {
+        width: 100%;
+    }
+
+    
+}

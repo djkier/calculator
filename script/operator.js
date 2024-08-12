@@ -49,6 +49,7 @@ function historyCall(sub){
 
 function resultToZero(){
     result = '';
+    subScreenNumber.textContent = '';
 }
 
 function divideByZero(){

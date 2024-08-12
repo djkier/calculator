@@ -31,6 +31,9 @@ body{
     background-color: var(--body-background-color);
 }
 
+.calculator-container {
+    margin: 0 auto;
+}
 
 
 .day-mode{
@@ -49,7 +52,7 @@ a {
 
 #copyright {
     color: var(--background-color);
-    margin-top: 0.3rem;
+    
     font-weight: 600;
     text-align: center;
     
@@ -63,6 +66,10 @@ a {
     overflow: hidden;
     
 }
+
+
+
+
 
 @keyframes bgAnimate {
     0% {
@@ -113,7 +120,6 @@ a {
     display: flex;
     height: calc(100% - 1.875rem);
     width: 100%;
-
     padding: 0.5rem 1rem 1rem;
     
 }
@@ -227,6 +233,7 @@ a {
     justify-content: space-between;
     padding:0.3125rem 0.3125rem 0.3125rem 0.625rem;
     align-items: flex-start;
+    
 }
 
 
